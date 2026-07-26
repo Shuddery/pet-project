@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '4.1.0'
+}
+
+group = 'com.practice'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter-api:6.0.3'
+    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.3'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.46.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.25.4'
+    implementation 'org.apache.logging.log4j:log4j-core:2.25.4'
+    implementation 'io.github.bonigarcia:webdrivermanager:6.3.3'
+    testImplementation 'org.testng:testng:7.11.0'
+    implementation 'io.rest-assured:rest-assured:6.0.0'
+    implementation 'com.google.code.gson:gson:2.13.2'
+    implementation 'org.projectlombok:lombok:1.18.46'
+    compileOnly 'org.projectlombok:lombok:1.18.46'
+    annotationProcessor 'org.projectlombok:lombok:1.18.46'
+    implementation 'ru.yandex.qatools.ashot:ashot:1.5.4'
+
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.1'
+    testImplementation 'io.qameta.allure:allure-commandline:2.44.0'
+    testImplementation 'io.qameta.allure:allure-assertj:2.35.3'
+    testImplementation 'io.qameta.allure:allure-rest-assured:2.35.3'
+    testImplementation 'io.qameta.allure:allure-java-commons:2.35.3'
+    testImplementation 'org.aspectj:aspectjweaver:1.9.25'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat = 'full'
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+}
