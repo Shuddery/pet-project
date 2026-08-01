@@ -38,7 +38,7 @@ public class DriverFactory {
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         Map<String, Object> prefs = new HashMap<>();
-        //chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--headless");
         prefs.put("profile.password_manager_leak_detection", false);
         chromeOptions.setExperimentalOption("prefs", prefs);
         chromeOptions.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36");
