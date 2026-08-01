@@ -6,9 +6,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.WebElement;
 import utils.IConstants;
 import utils.PropertyReader;
 import web.helpers.saucedemo.SaucedemoLoginHelper;
+import web.pages.saucedemo.SaucedemoLoginPage;
 import web.tests.CommonConditions;
 
 @ExtendWith(TestListener.class)
@@ -94,7 +96,7 @@ public class LoginPageTests extends CommonConditions {
                 .clearPasswordField()
                 .clickLoginButton();
         saucedemoLoginHelper.clickErrorButton();
-        Assertions.assertFalse(saucedemoLoginHelper.isErrorMessageDisplayed());
+        Assertions.assertTrue(saucedemoLoginHelper.isErrorMessageHidden());
     }
 
  }
