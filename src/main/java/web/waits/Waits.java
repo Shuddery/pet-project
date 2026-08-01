@@ -22,8 +22,18 @@ public class Waits {
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public static WebElement waitPresenceOfElementLocated(WebDriver driver, By locator) {
+        return new WebDriverWait(driver, Duration.ofSeconds(PropertyReader.getTimeoutSeconds()))
+                .until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
     public static List<WebElement> waitPresenceOfAllElementsLocated(WebDriver driver, By locator) {
         return new WebDriverWait(driver, Duration.ofSeconds(PropertyReader.getTimeoutSeconds()))
                 .until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    }
+
+    public static boolean isUrlContainsPath(WebDriver driver, String path) {
+        return new WebDriverWait(driver, Duration.ofSeconds(PropertyReader.getTimeoutSeconds()))
+                .until(ExpectedConditions.urlContains(path));
     }
 }
