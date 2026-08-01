@@ -1,11 +1,8 @@
 pipeline {
-    agent {
-        // Используем полный официальный образ Temurin JDK 21 (на базе Ubuntu)
-        // Он гарантирует 100% совместимость с Gradle Wrapper 8.8
-        docker {
-            image 'eclipse-temurin:21-jdk'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
+    agent any
+
+    tools {
+        jdk 'JDK21'
     }
 
     options {
@@ -30,7 +27,7 @@ pipeline {
         stage('Run UI & API Tests') {
             steps {
                 echo 'Starting Gradle test execution...'
-                // Запуск Gradle 8.8 через Wrapper
+                // Запуск Gradle 8.8 через встроенную Java 21
                 sh './gradlew test --no-daemon -Dgradle.continue=true'
             }
         }
