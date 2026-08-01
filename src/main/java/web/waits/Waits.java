@@ -22,10 +22,11 @@ public class Waits {
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public static WebElement waitPresenceOfElementLocated(WebDriver driver, By locator) {
+    public static boolean waitInvisibilityOfElementLocated(WebDriver driver, By locator) {
         return new WebDriverWait(driver, Duration.ofSeconds(PropertyReader.getTimeoutSeconds()))
-                .until(ExpectedConditions.presenceOfElementLocated(locator));
+                .until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
+
 
     public static List<WebElement> waitPresenceOfAllElementsLocated(WebDriver driver, By locator) {
         return new WebDriverWait(driver, Duration.ofSeconds(PropertyReader.getTimeoutSeconds()))

@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import web.helpers.AbstractHelper;
 import web.pages.saucedemo.SaucedemoLoginPage;
+import web.waits.Waits;
 
 public class SaucedemoLoginHelper extends AbstractHelper {
 
@@ -82,10 +83,10 @@ public class SaucedemoLoginHelper extends AbstractHelper {
         return this;
     }
 
-    @Step("Is error message displayed")
-    public boolean isErrorMessageDisplayed() {
-        log.info("Is error message displayed");
-        return SaucedemoLoginPage.getLoginErrorMessage(driver).isDisplayed();
+    @Step("Is error message hidden")
+    public boolean isErrorMessageHidden() {
+        log.info("Is error message hidden");
+        return SaucedemoLoginPage.isLoginErrorMessageHidden(driver);
     }
 
     @Step("Get error message text after unsuccessful login")

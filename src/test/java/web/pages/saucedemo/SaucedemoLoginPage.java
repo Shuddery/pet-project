@@ -35,6 +35,12 @@ public class SaucedemoLoginPage extends AbstractPage {
     }
 
     public static WebElement getLoginErrorMessage(WebDriver driver) {
-        return Waits.waitPresenceOfElementLocated(driver, loginErrorMessage);
+        return Waits.waitVisibilityOfElementLocated(driver, loginErrorMessage);
     }
-}
+
+    public static boolean isLoginErrorMessageHidden(WebDriver driver) {
+        return Waits.waitInvisibilityOfElementLocated(driver, loginErrorMessage);
+    }
+
+
+    }
