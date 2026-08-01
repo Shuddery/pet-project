@@ -7,6 +7,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DriverFactory {
 
     private static WebDriver driver;
@@ -34,7 +37,10 @@ public class DriverFactory {
 
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
+        Map<String, Object> prefs = new HashMap<>();
         //chromeOptions.addArguments("--headless");
+        prefs.put("profile.password_manager_leak_detection", false);
+        chromeOptions.setExperimentalOption("prefs", prefs);
         chromeOptions.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36");
         chromeOptions.addArguments("--window-size=1920,1200");
         chromeOptions.addArguments("--no-sandbox"); // Отключает sandbox (полезно в Docker-контейнерах и CI)

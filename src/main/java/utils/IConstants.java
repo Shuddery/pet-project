@@ -1,23 +1,21 @@
 package utils;
 
 public interface IConstants {
-    String productNameForAmazon = "iPhone";
-    String productNameForOnliner = "Смартфон Samsung Galaxy A52 SM-A525F/DS 4GB/128GB (черный)";
-    String placeName = "Luna";
-    String amazonAddedToCartMessage = "Added to Cart";
-    String onlinerAddedToCartMessage = "Товар добавлен в корзину";
-    String valueAfterAddProductToCart = "1";
-    String amazonShoppingCartHeader = "Shopping Cart";
-    String onlinerShoppingCartHeader = "Корзина";
-    String emptyShoppingCartMessage = "Ваша корзина пуста";
-    String addressOfSearchedResult = "Могилев, ул. Ленинская, 22";
-    String phoneNumberOfSearchedResult = "+375 29 333-00-74";
-    String blueColor = "rgba(0, 149, 204, 1)";
-    String districtName = "Заводской";
-    String kitchenName = "Белорусская";
-    String postIdPath = "response.post_id";
-    String commentIdPath = "response.comment_id";
-    String commentText = "test comment";
-    int likesAmount = 1;
+
+    // valid usernames + password
+    String standardUsername = "standard_user";
+    String lockedUsername = "locked_out_user";
+    String password = "secret_sauce";
+
+    // error messages + invalid credentials
+    String lockedUserErrorMessage = "Epic sadface: Sorry, this user has been locked out.";
+    String wrongCredentialsMessage = "Epic sadface: Username and password do not match any user in this service";
+    String wrongUsername = "wrong_username";
+    String wrongPassword = "wrong_password";
+    String emptyPasswordMessage = "Epic sadface: Password is required";
+    String emptyUsernameMessage = "Epic sadface: Username is required";
+
+    String titleOfLoginPage = "Swag Labs";
+    String productsPagePath = "/inventory.html";
     String pathToResources = "src/test/resources/screenshots/";
 }
