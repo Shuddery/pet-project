@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        CI = 'true'
+    }
+
     tools {
         jdk 'JDK21'
     }
@@ -19,7 +23,7 @@ pipeline {
 
         stage('Grant Execute Permissions') {
             steps {
-                echo 'Making gradlew executable...'
+                echo 'Making gradlew executable for Linux environment...'
                 sh 'chmod +x gradlew'
             }
         }
@@ -27,7 +31,6 @@ pipeline {
         stage('Run UI & API Tests') {
             steps {
                 echo 'Starting Gradle test execution...'
-                // Запуск Gradle 8.8 через встроенную Java 21
                 sh './gradlew test --no-daemon -Dgradle.continue=true'
             }
         }
@@ -39,10 +42,14 @@ pipeline {
             allure includeProperties: false, jdk: '', results: [[path: 'build/allure-results']]
         }
         success {
-            echo 'All tests passed successfully!'
+            echo '=================================================='
+            echo 'Pipeline finished successfully! All tests passed.'
+            echo '=================================================='
         }
         failure {
-            echo 'Pipeline failed. Check compilation errors or test failures.'
+            echo '=================================================='
+            echo 'Pipeline failed! Check test failures or compilation.'
+            echo '=================================================='
         }
     }
 }
