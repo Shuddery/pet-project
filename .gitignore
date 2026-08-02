@@ -299,4 +299,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+docker-compose.jenkins.yml
+docker-compose.selenoid.yml
+config/
+
+
 # End of https://www.toptal.com/developers/gitignore/api/java,kotlin,groovy,intellij+all,intellij,intellij+iml,windows
