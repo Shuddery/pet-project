@@ -53,7 +53,7 @@ public class DriverFactory {
 
     private static WebDriver createRemoteChrome() {
         try {
-            String selenoidUrl = "http://docker.internal";
+            String selenoidUrl = "http://selenoid:4444/wd/hub";
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
             capabilities.setBrowserName("chrome");
