@@ -18,4 +18,8 @@ public interface IConstants {
     String titleOfLoginPage = "Swag Labs";
     String productsPagePath = "/inventory.html";
     String pathToResources = "src/test/resources/screenshots/";
+
+    // query parameters
+    int maxLength = 50;
+    int limit = 3;
 }
