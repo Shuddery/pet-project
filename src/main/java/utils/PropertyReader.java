@@ -19,6 +19,10 @@ public class PropertyReader {
     public static String getBrowser() { return properties.getProperty("browser"); }
     public static String getCatfactsUrl() { return properties.getProperty("catfactsUrl"); }
 
+    public static String getLocalKafkaServers() {
+        return properties.getProperty("kafka.local.bootstrap.servers");
+    }
+
     public static Integer getTimeoutSeconds() {
         return Integer.valueOf(properties.getProperty("wait.timeout.seconds"));
     }
