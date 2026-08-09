@@ -29,11 +29,9 @@ public class FactBotSteps {
 
     @Step("Bot processes asynchronous request and sends fact to response topic")
     public CatFactModel processRequestAndSendResponse(String sessionId, String groupId) {
-        // Создаем уникальный groupId для защиты от пересечений в параллельных потоках
         String uniqueGroupId = groupId + "_backend_" + UUID.randomUUID();
         log.info("Starting backend emulation for sessionId '{}' using groupId '{}'", sessionId, uniqueGroupId);
 
-        // Перехватываем команду от пользователя
         String request = kafkaClient.sendAndAwaitMessage(REQUEST_TOPIC, sessionId, "NEED_RANDOM_FACT", uniqueGroupId, TIMEOUT);
 
         if (!"NEED_RANDOM_FACT".equals(request)) {
@@ -44,7 +42,6 @@ public class FactBotSteps {
         log.info("Successfully intercepted expected command. Fetching random cat fact from API...");
         CatFactModel factModel;
         try {
-            // Запрашиваем факт из внешнего REST API и приводим к модели-рекорду
             factModel = catFactService.getFact().as(CatFactModel.class);
         } catch (Exception e) {
             log.error("Failed to fetch or parse cat fact from REST API: ", e);
