@@ -1,6 +1,6 @@
 package api.clients;
 
-import api.config.KafkaConfig;
+import api.settings.KafkaConfig;
 import io.qameta.allure.Step;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -21,8 +21,6 @@ public class KafkaClient {
 
     private static final Logger log = LogManager.getLogger(KafkaClient.class);
 
-    // 1. Создаем ОДИН продюсер на весь класс, а не на каждый метод.
-    // Это экономит CPU и память, тесты будут бегать в 3-5 раз быстрее.
     private final KafkaProducer<String, String> producer = new KafkaProducer<>(KafkaConfig.getProducerProperties());
 
     @Step("Sending message to topic")
@@ -39,7 +37,6 @@ public class KafkaClient {
 
     @Step("Sending and waiting to receive a message in topic")
     public String sendAndAwaitMessage(String topic, String key, String value, String groupId, Duration timeout) {
-        // 2. Добавляем UUID к groupId, чтобы параллельные тесты не мешали друг другу на брокере
         String uniqueGroupId = groupId + "_" + UUID.randomUUID();
 
         try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(KafkaConfig.getConsumerProperties(uniqueGroupId))) {
@@ -52,7 +49,6 @@ public class KafkaClient {
 
             sendMessage(topic, key, value);
 
-            // 3. Вызываем общий метод ожидания, убирая дублирование кода
             return waitForMessage(consumer, key, timeout);
         } catch (Exception e) {
             log.error("Error while waiting for a message: ", e);
@@ -71,7 +67,6 @@ public class KafkaClient {
 
             consumer.seekToBeginning(Collections.singletonList(partition));
 
-            // 3. Вызываем тот же общий метод ожидания
             return waitForMessage(consumer, key, timeout);
         } catch (Exception e) {
             log.error("Error while waiting for a message: ", e);
@@ -79,7 +74,6 @@ public class KafkaClient {
         }
     }
 
-    // 4. Вынесенный общий метод для опроса топика (DRY - Don't Repeat Yourself)
     private String waitForMessage(KafkaConsumer<String, String> consumer, String expectedKey, Duration timeout) {
         AtomicReference<String> receivedValue = new AtomicReference<>(null);
 
