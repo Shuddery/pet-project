@@ -15,15 +15,19 @@ public abstract class BaseDbTest {
 
     @BeforeEach
     void setUpDb() {
-        String env = System.getProperty("env", "local");
-        String url = "ci".equalsIgnoreCase(env)
-                ? "jdbc:mysql://172.25.0.40:3306/pet_qa_db"
-                : "jdbc:mysql://localhost:3306/pet_qa_db";
+        String url;
+
+        if (System.getenv("CI") != null) {
+            url = "jdbc:mysql://172.25.0.40:3306/pet_qa_db";
+        } else {
+            url = "jdbc:mysql://localhost:3306/pet_qa_db";
+        }
 
         this.dbManager = new DbManager(url, "qa_user", "qa_password");
         this.uuid = UUID.randomUUID().toString();
-        this.cleanupTasks = new ArrayList<>();
+        this.cleanupTasks = new java.util.ArrayList<>();
     }
+
 
     protected void registerCleanup(Runnable cleanupTask) {
         this.cleanupTasks.add(cleanupTask);
