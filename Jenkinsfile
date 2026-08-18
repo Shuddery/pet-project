@@ -31,7 +31,7 @@ pipeline {
         stage('Run UI & API Tests') {
             steps {
                 echo 'Starting Gradle test execution...'
-                sh './gradlew test --no-daemon -Dgradle.continue=true'
+                sh './gradlew clean test --no-daemon -Dgradle.continue=true'
             }
         }
     }
